@@ -14,12 +14,14 @@ def templateSubscription():
     try:
         json_data = {
                         "message" : "",
-                        "time_stamp" : ""
+                        "time_stamp" : "",
+                        "user_id" : ""
                     }
         request_json = request.json
 
         json_data["message"] = request_json["message"].encode('UTF-8')
         json_data["time_stamp"] = datetime.now().strftime("%d/%m/%y  %H:%M:%S")
+        json_data["user_id"] = request_json["user_id"]
         if len(queue_messages) == 20:
             queue_messages.popleft()
         queue_messages.append(json_data)
